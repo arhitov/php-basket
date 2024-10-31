@@ -9,7 +9,6 @@ use Tests\TestCase;
 class MainTest extends TestCase
 {
     private ClientInterface|ClientFaker $httpClient;
-    private MockHubSDK $mockHubSDK;
 
     protected function setUp(): void
     {
@@ -35,7 +34,7 @@ class MainTest extends TestCase
             return ['body' => ['test' => 'ok']];
         });
 
-        $response = $this->httpClient->get('https://localhost/component?project=test&keys=cms:test-default');
+        $response = $this->httpClient->get('https://localhost/get?project=test');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('{"test":"ok"}', $response->getBody()->getContents());
     }
@@ -49,7 +48,7 @@ class MainTest extends TestCase
         });
 
         $response = $this->httpClient->post(
-            'https://localhost/publish',
+            'https://localhost/post',
             [
                 'project' => 'test',
                 'data' => [
@@ -61,16 +60,6 @@ class MainTest extends TestCase
         $this->assertEquals(
             '{"request":{"project":"test","data":{"foo":"bar"}}}',
             $response->getBody()->getContents()
-        );
-    }
-
-    public function test()
-    {
-        dd(
-            $this->mockHubSDK->push(new MockDto(
-                'test',
-                ['dummy'],
-            )),
         );
     }
 }
