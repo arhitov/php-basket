@@ -1,0 +1,14 @@
+{
+    ...
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.2", <- можно другой
+        "php-http/discovery": "^1.19"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+    ...
+}
